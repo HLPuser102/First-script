@@ -1,0 +1,70 @@
+import random
+pontos = int(input("Usar sistema de pontução?\nSim(1)\nNão(2)\n"))
+
+if pontos == 2:
+    print("Sem pontos.")
+else:
+    sisPontos = 1
+
+n = (random.randint(1, 100))
+op = int(input("Que modo deseja jogar?\nNormal(1)\nSoma(2)\n"))
+basemult = 5
+def mainJog():
+    if op == 1:
+        print("Escolhi um número inteiro de 1 a 100, adivinhe-o.")
+
+        Tent = int(input("Quantas tentativas deseja ter? "))
+        ins = float(input("Número: "))
+        win = 1
+        while win < Tent:
+            if ins == n:
+                print("Parabens! Você acertou!")
+                win += 1
+                break
+            elif ins <= 0:
+                print("Eu disse de 1 a 100, não use zero ou negativos.")
+                break
+            elif ins < n:
+                print("Tente um número maior.")
+                ins = float(input("Número: "))
+                win += 1
+
+            elif ins > 100.0:
+                print("Eu disse de 1 a 100, não passe de 100.")
+                break
+            else:
+                print("Tente um número menor.")
+                ins = float(input("Número: "))
+                win += 1
+
+        if sisPontos == 1:
+            mult = win - basemult
+            mult * (20 - Tent)
+            print("Você finalizou com", win, "tentativa(s), Ao total pediu", Tent, "tentativa(s). O número era", n ,"Sua pontuação final foi:", mult, )
+        else:
+            print("Você finalizou com", win, "tentativa(s), Ao total pediu", Tent, "tentativa(s). O número era", n ,)
+
+    else:
+        win = 1
+        Tent = int(input("Quantas tentativas deseja ter? "))
+        print(
+            "Escolhi um número inteiro, vou somar com o número que você disser e você deve adivinhar meu primeiro número.")
+        pSom = int(input("Escolha um número entre 25 e 250 para somar com o meu: "))
+        if pSom < 25:
+            print('Eu disse entre 25 e 250, não tente números menores que 25.')
+            exit()
+        elif pSom > 250:
+            print("Eu disse entre 25 e 250, não tente números maiores que 250.")
+            exit()
+        print("Meu número somado a", pSom, "é igual a", pSom + n, )
+        Ch = int(input("Adivinhe meu número: "))
+        while win < Tent:
+            if Ch == n:
+                print("Parábens! Você acertou!")
+                win += 1
+                break
+            else:
+                int(input("Tente novamente: "))
+                win += 1
+        print("Você finalizou com", win, "tentativa(s), Ao total pediu", Tent, "tentativa(s). O número era", n)
+mainJog()
